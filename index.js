@@ -67,13 +67,24 @@ function generateRandomInt() {
 }
 
 app.post("/api/persons", (request, response) => {
-  const person = request.body;
-  person.id = generateRandomInt();
-  persons = persons.concat(person);
+  const body = request.body;
 
-  console.log(person);
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "Name and Number required.",
+    });
+  }
 
-  response.json(person);
+  if (persons.find((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "Name must be unique.",
+    });
+  }
+
+  body.id = generateRandomInt();
+  persons = persons.concat(body);
+
+  response.json(body);
 });
 
 const PORT = 3001;
