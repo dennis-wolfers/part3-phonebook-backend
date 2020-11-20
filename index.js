@@ -62,8 +62,15 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
+function generateRandomInt() {
+  return Math.floor(Math.random() * 100000);
+}
+
 app.post("/api/persons", (request, response) => {
   const person = request.body;
+  person.id = generateRandomInt();
+  persons = persons.concat(person);
+
   console.log(person);
 
   response.json(person);
