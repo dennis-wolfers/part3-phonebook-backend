@@ -32,7 +32,7 @@ const person = new Person({
   number: newNumber,
 });
 
-note.save().then((result) => {
+person.save().then((result) => {
   console.log(``);
   mongoose.connection.close();
 });
