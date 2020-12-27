@@ -30,7 +30,6 @@ const errorHandler = (error, request, response, next) => {
 
   next(error);
 };
-app.use(errorHandler);
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
@@ -113,6 +112,8 @@ app.put("/api/persons/:id", (request, response, next) => {
     })
     .catch((error) => next(error));
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
